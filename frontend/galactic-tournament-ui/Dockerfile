@@ -1,4 +1,6 @@
-FROM node:22
+# ===== BUILD =====
+
+FROM node:22 AS build
 
 WORKDIR /app
 
@@ -8,6 +10,14 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 4200
+RUN npm run build
 
-CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
+# ===== RUNTIME =====
+
+FROM nginx:alpine
+
+COPY --from=build /app/dist/galactic-tournament-ui/browser /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

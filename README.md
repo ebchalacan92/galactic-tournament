@@ -291,6 +291,57 @@ Pruebas implementadas:
 
 ---
 
+## Requisitos Previos
+
+El único requisito para ejecutar la aplicación es:
+
+* Docker Desktop
+
+No es necesario instalar localmente:
+
+* Java 21
+* Maven
+* Node.js
+* Angular CLI
+
+La aplicación utiliza Docker Multi-Stage Builds para compilar y ejecutar tanto el backend como el frontend dentro de contenedores.
+
+## Ejecución de la Aplicación
+
+Desde la raíz del proyecto ejecutar:
+
+```bash
+docker compose up --build
+```
+
+La aplicación estará disponible en:
+
+* Frontend: http://localhost:4200
+* Backend: http://localhost:8080
+
+Para detener la aplicación:
+
+```bash
+docker compose down
+```
+
+## Arquitectura Docker
+
+### Backend
+
+* Spring Boot 3
+* Java 21
+* Maven
+
+El backend se compila automáticamente dentro de Docker y genera el archivo JAR durante el proceso de construcción de la imagen.
+
+### Frontend
+
+* Angular 21
+* Nginx
+
+El frontend se compila automáticamente dentro de Docker y es servido mediante Nginx en un entorno optimizado para producción.
+
 ## Autor
 
 Bryan Chalacan
